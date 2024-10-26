@@ -7,14 +7,20 @@ import java.util.ArrayList;
 public class input {
 
     private static ArrayList<double[]> inputData;
+    private ArrayList<X> modelFeed;
 
     input(String input){
         inputData = new ArrayList<double[]>();
         readfile(input);
 
         inputProcessing dataProcessing = new inputProcessing(inputData);
+        modelFeed = dataProcessing.modelInput();
 
 
+    }
+
+    public ArrayList<X> returnModelInput(){
+        return modelFeed;
     }
 
     

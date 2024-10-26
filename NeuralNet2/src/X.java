@@ -52,9 +52,8 @@ public class X {
                 double normalizeDeltaPrice = (deltaPrice-meanDeltaPrice)/stdDeltaPrice;
                 double normalizeVolatility = (vola-meanVolatility)/stdVolatility;
 
-                double[] temp = new double[2];
-                temp[0] = normalizeDeltaPrice;
-                temp[1] = normalizeVolatility;
+                double[] temp = new double[]{normalizeDeltaPrice, normalizeVolatility};
+                
 
                 normalizedData.add(temp);
 
@@ -73,6 +72,14 @@ public class X {
 
     public ArrayList<double[]> normalizedData(){
         return normalizedData;
+    }
+
+    public int getN(){
+        return nO;
+    }
+
+    public double getPriceChange(){
+        return pChange;
     }
 
     public void print(){

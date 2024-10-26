@@ -27,10 +27,15 @@ public class inputProcessing {//smoothen and normalize data for kNN model
             
         }
 
+/*
         for(int j=0; j<10; j++){
             X curr = xInput.get(j);
             curr.print();
         }
+*/
+    }
 
+    public ArrayList<X> modelInput(){
+        return xInput;
     }
 }
