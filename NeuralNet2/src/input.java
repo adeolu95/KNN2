@@ -8,12 +8,14 @@ public class input {
 
     private static ArrayList<double[]> inputData;
     private ArrayList<X> modelFeed;
+    private int days;
 
-    input(String input){
+    input(String input, int n){
         inputData = new ArrayList<double[]>();
+        days =n;
         readfile(input);
 
-        inputProcessing dataProcessing = new inputProcessing(inputData);
+        inputProcessing dataProcessing = new inputProcessing(inputData,days);
         modelFeed = dataProcessing.modelInput();
 
 

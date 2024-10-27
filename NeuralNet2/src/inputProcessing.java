@@ -5,10 +5,10 @@ public class inputProcessing {//smoothen and normalize data for kNN model
     private ArrayList<X> xInput;
     
 
-    inputProcessing(ArrayList<double[]> input){
+    inputProcessing(ArrayList<double[]> input,int numberDays){
 
         xInput = new ArrayList<X>();
-        this.n = 10; // will vary later to guage best performer; THIS IS A MAJOR REGULIZER FOR THE MODEL
+        this.n = numberDays; // will vary later to guage best performer; THIS IS A MAJOR REGULIZER FOR THE MODEL
 
         
         for(int i =0; i+(n+1)< input.size(); i++){

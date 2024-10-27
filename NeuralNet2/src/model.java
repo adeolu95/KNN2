@@ -4,6 +4,8 @@ public class model {
 
     private int k; //number of nearest neighbours used in the prediction; MAJOR REGULARIZATION POINT. 
     private double percent; // % of data used for memory storage; MAJOR REGULARIZATION POINT 
+    private double instanceProfitability;
+
     //Has to have an upper limit because some data has to be used for test.
 
     ArrayList<X> historicalData;// store previous information for distance comparison.
@@ -39,14 +41,15 @@ public class model {
                 ArrayList<double[]> modelInput = curr.normalizedData();
                 double modelPrediction = makePrediction(modelInput);
 
-                System.out.println("\nActual Price Change: "+ actualPriceChange);
-                System.out.println("Model Predicted Price Change: "+ modelPrediction);
+                //System.out.println("\nActual Price Change: "+ actualPriceChange);
+              //  System.out.println("Model Predicted Price Change: "+ modelPrediction);
                 if(isProfitable(modelPrediction, actualPriceChange))profitable++;
             }
 
             double profitability = (profitable/counter)*100; 
+            instanceProfitability= profitability;
             
-            System.out.println("\nModel profitable: "+profitability);
+            //System.out.println("\nModel profitable: "+profitability);
 
 
        
@@ -61,6 +64,10 @@ public class model {
 
 
 
+    }
+
+    public double modelProfit(){
+        return instanceProfitability;
     }
     
 
