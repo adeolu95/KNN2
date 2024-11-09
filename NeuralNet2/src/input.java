@@ -1,4 +1,3 @@
-import java.util.Arrays;
 import java.io.FileReader;
 import java.io.IOException;
 import java.io.BufferedReader;
@@ -7,23 +6,46 @@ import java.util.ArrayList;
 public class input {
 
     private static ArrayList<double[]> inputData;
+    
     private ArrayList<X> modelFeed;
     private int days;
+    private inputProcessing dataProcessing;
 
     input(String input, int n){
         inputData = new ArrayList<double[]>();
         days =n;
+        
         readfile(input);
 
-        inputProcessing dataProcessing = new inputProcessing(inputData,days);
+        dataProcessing = new inputProcessing(inputData,days);
+        
         modelFeed = dataProcessing.modelInput();
+       
+       
 
 
     }
+   
+
+    
 
     public ArrayList<X> returnModelInput(){
         return modelFeed;
     }
+
+    public ArrayList<double[]> getPredictionData(int number){
+        ArrayList<double[]> result = new ArrayList<double[]>();
+        int noDays = number;
+        for (int i = (inputData.size()-1)-noDays; i<inputData.size()-1; i++){
+            double[] temp = inputData.get(i);
+            result.add(temp);
+        }
+        
+
+
+        return result;
+    }
+
 
     
     private static void readfile(String loc){

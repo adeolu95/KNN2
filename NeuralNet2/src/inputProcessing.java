@@ -4,11 +4,15 @@ public class inputProcessing {//smoothen and normalize data for kNN model
     private int n; //number of days considered for each price change n+1
     private ArrayList<X> xInput;
     
+    
 
     inputProcessing(ArrayList<double[]> input,int numberDays){
+        
 
         xInput = new ArrayList<X>();
         this.n = numberDays; // will vary later to guage best performer; THIS IS A MAJOR REGULIZER FOR THE MODEL
+        
+      
 
         
         for(int i =0; i+(n+1)< input.size(); i++){
@@ -17,11 +21,14 @@ public class inputProcessing {//smoothen and normalize data for kNN model
 
             ArrayList<double[]> xValues = new ArrayList<> (input.subList(i,i+n));
             X modelInput = new X(n,targetPriceChange,xValues);
+            
 
             xInput.add(modelInput);
 
+           
 
-            
+
+          
 
 
             
@@ -35,7 +42,11 @@ public class inputProcessing {//smoothen and normalize data for kNN model
 */
     }
 
+    
+
     public ArrayList<X> modelInput(){
         return xInput;
     }
+
+    
 }

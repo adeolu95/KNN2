@@ -13,10 +13,10 @@ public class Main {
         int idealNeighbours =0;
         // With these 3 regularization points, we select for the best performer on the test set and apply that to live trading predictions.
         // Training Epochs
-        int epoch = 100;
+        int epoch = 10;
 
         //boundaries for the regularization parameters
-        int maxDays = 25;
+        int maxDays = 25; 
         int minDays =4;
 
         double minPercData = 0.05;
@@ -24,6 +24,11 @@ public class Main {
 
         int minNeigbours = 1;
         int maxNeighbours = 30;
+        ArrayList<double[]> predictionData = new ArrayList<double[]>();
+
+       
+
+        model predictionModel=null;
 
         double maxProfitability = 0;
         
@@ -33,8 +38,15 @@ public class Main {
                 double random1 = Math.random();
                 double random2 = Math.random();
 
+                System.out.println("Counter: "+i);
+
+
                 
+
                 input runModel = new input(inputLocation,numberOfDays);
+                
+                
+
                 ArrayList<X> modelInput = runModel.returnModelInput();
 
             // System.out.println("Size of model Input in main class: "+ modelInput.size());
@@ -47,6 +59,10 @@ public class Main {
                     idealN=numberOfDays;
                     idealPerc= percData;
                     idealNeighbours = neighbours;
+                    
+
+                   
+                    predictionModel=testModel;
                 }
 
                 numberOfDays = (int) (random*maxDays);
@@ -58,6 +74,12 @@ public class Main {
                 neighbours = (int) (random2* maxNeighbours);
                 neighbours = Math.max(minNeigbours, neighbours);
 
+                if ((epoch-i)==1){
+                    predictionData = runModel.getPredictionData(idealN);
+                    System.out.println("triggered");
+
+                }
+
                
 
 
@@ -66,6 +88,16 @@ public class Main {
 
         System.out.println("At the end of the Optimization process; MAX PROFIT: "+maxProfitability+"\nData Points used to achieve this; Number of days: "+idealN+
         "\nPercentage of Data: "+idealPerc+"\nNumber of neighbours: "+idealNeighbours);
+        predictionModel.print();
+        
+
+        double predic = predictionModel.makePrediction(predictionData);
+        System.out.println("\nModel Prediction for next day price change: "+ predic);
+       
+        
+
+
+        
     }
     
 }

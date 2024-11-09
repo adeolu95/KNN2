@@ -33,7 +33,7 @@ public class model {
             double counter = 0;
             double profitable =0;
 
-            for (int j=testStart; j<size&&j<testStart+1000; j++ ){
+            for (int j=testStart; j<size&&j<((testStart+(size-neighboursConsidered))); j++ ){
                 counter++;
                 X curr = input.get(j);
                 double actualPriceChange = curr.getPriceChange();
@@ -66,6 +66,11 @@ public class model {
 
     }
 
+    public void print(){
+        System.out.println("\nSize of model knowledge array: "+historicalData.size()+"\nPercentage of Input used: "+percent
+        + "\nNumber of neighbours considered: "+k);
+    }
+
     public double modelProfit(){
         return instanceProfitability;
     }
@@ -80,7 +85,7 @@ public class model {
         return result;
     }
 
-    private double makePrediction(ArrayList<double[]> input){
+   public double makePrediction(ArrayList<double[]> input){
         int counter = 0; 
         double [] posValues = new double [k]; // number of values used in the prediction
 
@@ -156,6 +161,7 @@ public class model {
 
         else {
             System.out.println("Check distance method in model class; input arrayLists are not the same size");
+            System.out.println("Size of Array1: "+data1.size()+" Size of Array2: "+ data2.size());
         }
 
 
