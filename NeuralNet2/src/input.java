@@ -5,7 +5,7 @@ import java.util.ArrayList;
 
 public class input {
 
-    private static ArrayList<double[]> inputData;
+    private ArrayList<double[]> inputData;
     
     private ArrayList<X> modelFeed;
     private int days;
@@ -15,7 +15,7 @@ public class input {
         inputData = new ArrayList<double[]>();
         days =n;
         
-        readfile(input);
+        readfile(input,inputData);
 
         dataProcessing = new inputProcessing(inputData,days);
         
@@ -36,8 +36,9 @@ public class input {
     public ArrayList<double[]> getPredictionData(int number){
         ArrayList<double[]> result = new ArrayList<double[]>();
         int noDays = number;
-        for (int i = (inputData.size()-1)-noDays; i<inputData.size()-1; i++){
+        for (int i = (inputData.size())-noDays; i<inputData.size(); i++){
             double[] temp = inputData.get(i);
+            System.out.println("Targeted data: "+ temp[0]+ ", "+ temp[1]+ temp[2]+ ", "+ temp[3]);
             result.add(temp);
         }
         
@@ -48,7 +49,7 @@ public class input {
 
 
     
-    private static void readfile(String loc){
+    private static void readfile(String loc, ArrayList<double[]> dataList){
         String line ="";
         try{
             BufferedReader br = new BufferedReader(new FileReader(loc));
@@ -64,7 +65,9 @@ public class input {
                 
                 double[] input = new double[4];
                 input[0]=open; input[1]=high; input[2]=low; input[3]=close;
-                inputData.add(input);
+                dataList.add(input);
+
+              
             }
         }
         br.close();
@@ -74,6 +77,9 @@ public class input {
         e.printStackTrace();
     }
 }
+
+
+  
 
 
 }

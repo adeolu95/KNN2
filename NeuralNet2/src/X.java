@@ -137,6 +137,7 @@ public class X {
     }
 
     public ArrayList<double[]> normalizedData(){
+        
         return normalizedData;
     }
 
