@@ -38,7 +38,7 @@ public class input {
         int noDays = number;
         for (int i = (inputData.size())-noDays; i<inputData.size(); i++){
             double[] temp = inputData.get(i);
-            System.out.println("Targeted data: "+ temp[0]+ ", "+ temp[1]+ temp[2]+ ", "+ temp[3]);
+            System.out.println("Targeted data: "+ temp[0]+ ", "+ temp[1]+","+ temp[2]+ ", "+ temp[3]);
             result.add(temp);
         }
         

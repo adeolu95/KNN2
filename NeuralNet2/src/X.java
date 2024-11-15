@@ -168,7 +168,10 @@ public class X {
     private double smoothenPrice(double x){
 
         double result = 0.0;
-        if (x>=0 && x<0.5) result=0.01;
+        if (x>=0 && x<0.15) result=0.01;
+        else if(x>=0.15 && x<0.30)result = 0.15;
+        else if(x>=0.30 && x<0.45)result = 0.30;
+        else if(x>=0.45 && x<0.50)result = 0.45;
         else if (x>=0.5 && x<0.75) result = 0.5;
         else if (x>=0.75 && x<1.00) result = 0.75;
         else if (x>=1.00 && x<1.25) result = 1.00;
@@ -186,7 +189,9 @@ public class X {
         else if (x>=6.00 && x<6.50) result = 6.00;
         else if (x>=6.50 && x<7.00) result = 6.50;
         else if (x>=7.00) result = 7.00;
-        else if (x<0 && x>-0.50)result =-0.01;
+        else if (x<0 && x>-0.15)result =-0.01;
+        else if (x<=-0.15 && x>-0.30)result =-0.15;
+        else if (x<=-0.30 && x>-0.50)result =-0.30;
         else if (x<=-0.50 && x>-0.75)result =-0.50;
         else if (x<=-0.75 && x>-1.00)result =-0.75;
         else if (x<=-1.00 && x>-1.25)result =-1.00;

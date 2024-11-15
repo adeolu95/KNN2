@@ -6,24 +6,24 @@ public class Main {
         int numberOfDays=6; //used to regularize number of days
         int idealN =0;
 
-        double percData=0.15; // used to regularize the amount of data used for model "memory"
+        double percData=0.90; // used to regularize the amount of data used for model "memory"
         double idealPerc =0;
 
-        int neighbours=5; // used to regularize the amount of neighbours considered for predicts
+        int neighbours=2; // used to regularize the amount of neighbours considered for predicts
         int idealNeighbours =0;
         // With these 3 regularization points, we select for the best performer on the test set and apply that to live trading predictions.
         // Training Epochs
-        int epoch = 35;
+        int epoch = 25;
 
         //boundaries for the regularization parameters
-        int maxDays = 15; 
+        int maxDays = 60; 
         int minDays =4;
 
         double minPercData = 0.05;
-        double maxPercData = 0.50;
+        double maxPercData = 0.60;
 
         int minNeigbours = 1;
-        int maxNeighbours = 7;
+        int maxNeighbours = 15;
         ArrayList<double[]> predictionData = new ArrayList<double[]>();
 
        
@@ -68,8 +68,8 @@ public class Main {
                 numberOfDays = (int) (random*maxDays);
                 numberOfDays = Math.max(minDays, numberOfDays);
 
-                percData = random1*maxPercData;
-                percData = Math.max(minPercData, percData);
+                //percData = random1*maxPercData;
+                //percData = Math.max(minPercData, percData);
 
                 neighbours = (int) (random2* maxNeighbours);
                 neighbours = Math.max(minNeigbours, neighbours);
