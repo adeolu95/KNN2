@@ -2,28 +2,28 @@ import java.util.ArrayList;
 public class Main {
 
     public static void main(String[] args){
-        String inputLocation = "C:\\Users\\adeol\\OneDrive\\spyCandles.csv";
+        String inputLocation = "C:\\Users\\adeol\\OneDrive\\Documents\\orcl 2w.csv";
         int numberOfDays=6; //used to regularize number of days
         int idealN =0;
 
-        double percData=0.90; // used to regularize the amount of data used for model "memory"
+        double percData=0.60; // used to regularize the amount of data used for model "memory"
         double idealPerc =0;
 
-        int neighbours=2; // used to regularize the amount of neighbours considered for predicts
+        int neighbours=1 ; // used to regularize the amount of neighbours considered for predicts
         int idealNeighbours =0;
         // With these 3 regularization points, we select for the best performer on the test set and apply that to live trading predictions.
         // Training Epochs
-        int epoch = 25;
+        int epoch = 15;
 
         //boundaries for the regularization parameters
-        int maxDays = 60; 
-        int minDays =4;
+        int maxDays = 25; 
+        int minDays =3;
 
         double minPercData = 0.05;
         double maxPercData = 0.60;
 
         int minNeigbours = 1;
-        int maxNeighbours = 15;
+        int maxNeighbours = 3;
         ArrayList<double[]> predictionData = new ArrayList<double[]>();
 
        
@@ -81,7 +81,7 @@ public class Main {
                     for(int j =0 ;  j<predictionData.size(); j++ ){
 
                         double[] curr = predictionData.get(j);
-                        System.out.println("Targeted normalized data: "+ curr[0]+ ", "+ curr[1]);
+                        System.out.println("Normalized data [Prediction]: "+ curr[0]+ ", "+ curr[1]);
                     }
                     System.out.println("triggered");
 

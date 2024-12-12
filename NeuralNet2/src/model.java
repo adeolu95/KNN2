@@ -10,14 +10,21 @@ public class model {
 
     ArrayList<X> historicalData;// store previous information for distance comparison.
 
+    ArrayList<X> testData; //Keeping the test data constant to compare performance
+
 
     model(ArrayList<X> input, double perc, int neighboursConsidered){
 
         if(input.size()>0){
             //Testing the amount of days, n involved
             historicalData = new ArrayList<X>();
+            
             percent = perc;
             k= neighboursConsidered;
+
+            int test = (int) (0.4*input.size());
+            testData = new ArrayList<>(input.subList(test, (input.size()-10)));
+        
 
             int storage  = (int) (percent*input.size());
             ArrayList<X> memoryData = new ArrayList<>(input.subList(0,storage));
@@ -28,14 +35,13 @@ public class model {
 
             
            
-            int testStart = storage+10;
-            int size = input.size();
+            
             double counter = 0;
             double profitable =0;
 
-            for (int j=testStart; j<size&&j<((testStart+(size-neighboursConsidered))); j++ ){
+            for (int j=0; j<testData.size(); j++ ){
                 counter++;
-                X curr = input.get(j);
+                X curr = testData.get(j);
                 double actualPriceChange = curr.getPriceChange();
 
                 ArrayList<double[]> modelInput = curr.normalizedData();
@@ -91,28 +97,46 @@ public class model {
 
         ArrayList<X> dataCopy =copyArray(historicalData);
 
-        //System.out.println("Size of dataCopy Array: "+historicalData.size());
-        double distance = 100000000;
-        X bestX = null;
+       // System.out.println("Size of dataCopy Array: "+historicalData.size());
+        
+       X bestX =null;
         while (counter< posValues.length){
 
-            int indexofBest = 0; // to trim an already selected answer from the search
-                for (int i=0; i<dataCopy.size(); i++){
+           
+            double distance = Double.MAX_VALUE;
+            int indexofBest = -1; // to trim an already selected answer from the search
+            int counter2 =0;
+            int numOfSearch = 2; //how many times to parse the normdata array to ensure the closest answer is selected
+
+            while (counter2<numOfSearch){
+                int size = dataCopy.size();
+            
+                for (int i=0; i<size; i++){
                     X curr = dataCopy.get(i);
                     ArrayList<double[]> normData = curr.normalizedData();
 
                     double currDist = distance(normData, input);
-                    if (currDist<distance){
+                    if (currDist<distance ){
                         distance = currDist;
                         bestX = curr;
                         indexofBest =i;
                     }
                 }
 
-                dataCopy.remove(indexofBest);
-
+                if (indexofBest>=0){
+                    dataCopy.remove(indexofBest);
+                    dataCopy.trimToSize();
+                    indexofBest = -1;
+                }
+               
+                counter2++;
+            }
 
                 posValues[counter] = bestX.getPriceChange();
+                
+
+
+               
                 counter++;
 
 
@@ -147,8 +171,10 @@ public class model {
         double sum =0;
         if(data1.size()==data2.size()){
             for(int i=0; i< data1.size(); i++){
-                double dist1 = Math.pow(data1.get(i)[0]- data2.get(i)[0],2);
-                double dist2 = Math.pow(data1.get(i)[1]- data2.get(i)[1],2);
+                double diff1 = data1.get(i)[0]- data2.get(i)[0];
+                double diff2 = data1.get(i)[1]- data2.get(i)[1];
+                double dist1 = Math.pow(diff1,2);
+                double dist2 = Math.pow(diff2,2);
 
                 sum+= dist1+dist2;
             }
@@ -165,6 +191,18 @@ public class model {
         }
 
 
+
+        return result;
+    }
+
+    private boolean present (double value, double[] storage){
+        boolean result = false;
+
+        for (int i =0; i< storage.length; i++){
+            if(Math.abs((value-storage[0]))<0.0001){
+                result = true;
+            }
+        }
 
         return result;
     }

@@ -48,11 +48,13 @@ public class X {
                 double[] currDay = xValues.get(j);
                 double deltaPrice = currDay[3]-currDay[0];
                 double vola = currDay[1]-currDay[2];
+                if(stdDeltaPrice ==0)stdDeltaPrice = 0.01;
+                if(stdVolatility ==0)stdVolatility = 0.01;
 
                 double normalizeDeltaPrice = (deltaPrice-meanDeltaPrice)/stdDeltaPrice;
                 double normalizeVolatility = (vola-meanVolatility)/stdVolatility;
 
-                double[] temp = new double[]{normalizeDeltaPrice, normalizeVolatility};
+                double[] temp = new double[]{reLU(Math.tanh(normalizeDeltaPrice)), reLU(Math.tanh(normalizeVolatility))};
                 
 
                 normalizedData.add(temp);
@@ -115,10 +117,13 @@ public class X {
                 double deltaPrice = currDay[3]-currDay[0];
                 double vola = currDay[1]-currDay[2];
 
+                if(stdDeltaPrice ==0)stdDeltaPrice = 0.01;
+                if(stdVolatility ==0)stdVolatility = 0.01;
+
                 double normalizeDeltaPrice = (deltaPrice-meanDeltaPrice)/stdDeltaPrice;
                 double normalizeVolatility = (vola-meanVolatility)/stdVolatility;
 
-                double[] temp = new double[]{normalizeDeltaPrice, normalizeVolatility};
+                double[] temp = new double[]{reLU(Math.tanh(normalizeDeltaPrice)), reLU(Math.tanh(normalizeVolatility))};
                 
 
                 normalizedData.add(temp);
@@ -162,6 +167,11 @@ public class X {
 
     }
 
+    private double reLU(double input){// see if rectified linear unit provides better generalization\
+       return input;
+        // return Math.max(0, input);
+    }
+
 
     // Create method to smoothen price to make model predcition a lot better
 
@@ -190,8 +200,8 @@ public class X {
         else if (x>=6.50 && x<7.00) result = 6.50;
         else if (x>=7.00) result = 7.00;
         else if (x<0 && x>-0.15)result =-0.01;
-        else if (x<=-0.15 && x>-0.30)result =-0.15;
-        else if (x<=-0.30 && x>-0.50)result =-0.30;
+        else if (x<= -0.15 && x>-0.30)result =-0.15;
+        else if (x<= -0.30 && x>-0.50)result =-0.30;
         else if (x<=-0.50 && x>-0.75)result =-0.50;
         else if (x<=-0.75 && x>-1.00)result =-0.75;
         else if (x<=-1.00 && x>-1.25)result =-1.00;
