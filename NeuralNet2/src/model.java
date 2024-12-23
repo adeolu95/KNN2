@@ -5,6 +5,7 @@ public class model {
     private int k; //number of nearest neighbours used in the prediction; MAJOR REGULARIZATION POINT. 
     private double percent; // % of data used for memory storage; MAJOR REGULARIZATION POINT 
     private double instanceProfitability;
+    private int testSize;
 
     //Has to have an upper limit because some data has to be used for test.
 
@@ -24,6 +25,7 @@ public class model {
 
             int test = (int) (0.4*input.size());
             testData = new ArrayList<>(input.subList(test, (input.size()-10)));
+            testSize = testData.size();
         
 
             int storage  = (int) (percent*input.size());
@@ -70,6 +72,10 @@ public class model {
 
 
 
+    }
+
+    public void testSize(){
+        System.out.println("\nSize of test data for the model:"+testSize);
     }
 
     public void print(){

@@ -2,7 +2,7 @@ import java.util.ArrayList;
 public class Main {
 
     public static void main(String[] args){
-        String inputLocation = "C:\\Users\\adeol\\OneDrive\\Documents\\orcl 2w.csv";
+        String inputLocation = "C:\\Users\\adeol\\OneDrive\\Documents\\tph 2w.csv";
         int numberOfDays=6; //used to regularize number of days
         int idealN =0;
 
@@ -13,7 +13,7 @@ public class Main {
         int idealNeighbours =0;
         // With these 3 regularization points, we select for the best performer on the test set and apply that to live trading predictions.
         // Training Epochs
-        int epoch = 15;
+        int epoch = 1000;
 
         //boundaries for the regularization parameters
         int maxDays = 25; 
@@ -23,7 +23,7 @@ public class Main {
         double maxPercData = 0.60;
 
         int minNeigbours = 1;
-        int maxNeighbours = 3;
+        int maxNeighbours = 5;
         ArrayList<double[]> predictionData = new ArrayList<double[]>();
 
        
@@ -95,7 +95,9 @@ public class Main {
 
         System.out.println("At the end of the Optimization process; MAX PROFIT: "+maxProfitability+"\nData Points used to achieve this; Number of days: "+idealN+
         "\nPercentage of Data: "+idealPerc+"\nNumber of neighbours: "+idealNeighbours);
+        predictionModel.testSize();
         predictionModel.print();
+        
         
 
         double predic = predictionModel.makePrediction(predictionData);
