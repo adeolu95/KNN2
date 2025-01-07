@@ -21,8 +21,8 @@ public class X {
             //Finding the mean and standard deviation to locally normalize data before feeding into model
             for( int i =0; i<n; i++){
                 double[] currDay = xValues.get(i);
-                double deltaPrice = currDay[3]-currDay[0];
-                double vola = currDay[1]-currDay[2];
+                double deltaPrice = ((currDay[3]-currDay[0])/currDay[0])*100;
+                double vola =((currDay[1]-currDay[2])/currDay[0])*100;
 
                 sumDeltaPrice+=deltaPrice;
                 sumVolatility+=vola;
@@ -46,22 +46,22 @@ public class X {
 
             for(int j =0; j<n; j++){
                 double[] currDay = xValues.get(j);
-                double deltaPrice = currDay[3]-currDay[0];
-                double vola = currDay[1]-currDay[2];
+                double deltaPrice = ((currDay[3]-currDay[0])/currDay[0])*100;
+                double vola =((currDay[1]-currDay[2])/currDay[0])*100;
+
                 if(stdDeltaPrice ==0)stdDeltaPrice = 0.01;
                 if(stdVolatility ==0)stdVolatility = 0.01;
 
                 double normalizeDeltaPrice = (deltaPrice-meanDeltaPrice)/stdDeltaPrice;
                 double normalizeVolatility = (vola-meanVolatility)/stdVolatility;
 
-                double[] temp = new double[]{reLU(Math.tanh(normalizeDeltaPrice)), reLU(Math.tanh(normalizeVolatility))};
+                double[] temp = new double[]{reLU((normalizeDeltaPrice)), reLU((normalizeVolatility))};
                 
 
                 normalizedData.add(temp);
 
 
             }
-
 
            
 
@@ -89,8 +89,8 @@ public class X {
             //Finding the mean and standard deviation to locally normalize data before feeding into model
             for( int i =0; i<n; i++){
                 double[] currDay = xValues.get(i);
-                double deltaPrice = currDay[3]-currDay[0];
-                double vola = currDay[1]-currDay[2];
+                double deltaPrice = ((currDay[3]-currDay[0])/currDay[0])*100;
+                double vola =((currDay[1]-currDay[2])/currDay[0])*100;
 
                 sumDeltaPrice+=deltaPrice;
                 sumVolatility+=vola;
@@ -114,8 +114,8 @@ public class X {
 
             for(int j =0; j<n; j++){
                 double[] currDay = xValues.get(j);
-                double deltaPrice = currDay[3]-currDay[0];
-                double vola = currDay[1]-currDay[2];
+                double deltaPrice = ((currDay[3]-currDay[0])/currDay[0])*100;
+                double vola =((currDay[1]-currDay[2])/currDay[0])*100;
 
                 if(stdDeltaPrice ==0)stdDeltaPrice = 0.01;
                 if(stdVolatility ==0)stdVolatility = 0.01;
@@ -123,7 +123,7 @@ public class X {
                 double normalizeDeltaPrice = (deltaPrice-meanDeltaPrice)/stdDeltaPrice;
                 double normalizeVolatility = (vola-meanVolatility)/stdVolatility;
 
-                double[] temp = new double[]{reLU(Math.tanh(normalizeDeltaPrice)), reLU(Math.tanh(normalizeVolatility))};
+                double[] temp = new double[]{reLU((normalizeDeltaPrice)), reLU((normalizeVolatility))};
                 
 
                 normalizedData.add(temp);
@@ -169,7 +169,8 @@ public class X {
 
     private double reLU(double input){// see if rectified linear unit provides better generalization\
     return input;
-      // return Math.max(0, input);
+     //return Math.max(0.0, input);
+     
     }
 
 

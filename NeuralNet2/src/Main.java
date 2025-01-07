@@ -2,7 +2,7 @@ import java.util.ArrayList;
 public class Main {
 
     public static void main(String[] args){
-        String inputLocation = "C:\\Users\\adeol\\OneDrive\\Documents\\tph 2w.csv";
+        String inputLocation = "C:\\Users\\adeol\\OneDrive\\Documents\\gm 1w.csv";
         int numberOfDays=6; //used to regularize number of days
         int idealN =0;
 
