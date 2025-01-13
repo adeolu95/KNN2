@@ -169,7 +169,8 @@ public class X {
 
     private double reLU(double input){// see if rectified linear unit provides better generalization\
     return input;
-     //return Math.max(0.0, input);
+   // return Math.tanh(input);
+    // return Math.max(0.0, input);
      
     }
 

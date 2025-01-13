@@ -2,7 +2,7 @@ import java.util.ArrayList;
 public class Main {
 
     public static void main(String[] args){
-        String inputLocation = "C:\\Users\\adeol\\OneDrive\\Documents\\gm 1w.csv";
+        String inputLocation = "C:\\Users\\adeol\\OneDrive\\Documents\\abbv 1w.csv";
         int numberOfDays=6; //used to regularize number of days
         int idealN =0;
 
@@ -13,7 +13,7 @@ public class Main {
         int idealNeighbours =0;
         // With these 3 regularization points, we select for the best performer on the test set and apply that to live trading predictions.
         // Training Epochs
-        int epoch = 1000;
+        int epoch = 2000;
 
         //boundaries for the regularization parameters
         int maxDays = 25; 
